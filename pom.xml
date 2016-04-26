@@ -9,20 +9,14 @@
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-core_2.10</artifactId>
+      <artifactId>spark-core_2.11</artifactId>
       <version>1.6.1</version>
     </dependency>
     <dependency>
     <groupId>org.apache.spark</groupId>
-    <artifactId>spark-sql_2.11</artifactId>
-    <version>1.2.1</version>
+    <artifactId>spark-sql_2.10</artifactId>
+    <version>1.6.1</version>
 </dependency>
     <dependency>
       <groupId>org.apache.hadoop</groupId>
@@ -32,13 +26,7 @@
     <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
-            <version>2.11.4</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
+            <version>2.12.0-M4</version>
         </dependency>
   </dependencies>
   <build>
@@ -46,6 +34,7 @@
             <plugin>
                 <groupId>org.scala-tools</groupId>
                 <artifactId>maven-scala-plugin</artifactId>
+                <version>2.15.2</version>
                 <executions>
                     <execution>
                         <goals>
@@ -61,6 +50,14 @@
                         <jvmArg>-Xmx1024m</jvmArg>
                     </jvmArgs>
                 </configuration>
+            </plugin>
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>exec-maven-plugin</artifactId>
+              <version>1.1</version>
+              <configuration>
+                <mainClass>com.mycompany.myapp.SparkQueries</mainClass>
+              </configuration>
             </plugin>
         </plugins>
     </build>
