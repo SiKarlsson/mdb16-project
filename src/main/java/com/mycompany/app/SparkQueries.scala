@@ -24,9 +24,9 @@ object SparkQueries {
 		 //types.{StructType, StructField, StringgType}
 		
 		val pathToFile = "/user/hduser/artist"
-		val conf = new SparkConf().setMaster("local")
-		val sc = new SparkContext(conf)
-		//val sc = new SparkContext(new SparkConf().setAppName("Spark Queries").setMaster("local"))
+		//val conf = new SparkConf()//.setAppName("Spark Queries")//.setMaster("local")
+		//val sc = new SparkContext(conf)
+		val sc = new SparkContext(new SparkConf().setAppName("Spark Queries").setMaster("local"))
 		val sqlContext = new org.apache.spark.sql.SQLContext(sc)
 		// get file from hdfs
 		val artist = sc.textFile(pathToFile)
