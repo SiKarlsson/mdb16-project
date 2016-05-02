@@ -23,9 +23,9 @@ object SparkQueries {
 
 		 //types.{StructType, StructField, StringgType}
 		
-		val pathToFile = "/user/hduser/artist"
-		//val conf = new SparkConf()//.setAppName("Spark Queries")//.setMaster("local")
-		//val sc = new SparkContext(conf)
+		val pathToFile = "hdfs://localhost:50070/user/hduser/artist"
+		//val conf = new SparkConf().setAppName("Spark Queries").setMaster("local")
+		//val sc = new org.apache.spark.SparkContext()
 		val sc = new SparkContext(new SparkConf().setAppName("Spark Queries").setMaster("local"))
 		val sqlContext = new org.apache.spark.sql.SQLContext(sc)
 		// get file from hdfs
@@ -47,14 +47,17 @@ object SparkQueries {
 		println("HERE 3")
 		// extract columns from file (split by ',')
 		val rowRDD = artist.map(_.split(",")).map(a => Row(a(0).trim,a(1).trim, a(2).trim, a(7).trim, a(8).trim, a(9).trim))
+		println("HERE 4")
 		val artistDF = sqlContext.createDataFrame(rowRDD, schema)
 		
 		// tmptable is created
 		artistDF.registerTempTable("artistt")
-		val allrecords = sqlContext.sql("SELECT * FROM artistt")
-		allrecords.show()
+		//val allrecords = sqlContext.sql("SELECT * FROM artistt")
+		println("HERE 5")
+		//allrecords.show()
 		val bornInThe90s = sqlContext.sql("SELECT * FROM artistt WHERE type='1' AND begindate LIKE('199%')")
-		bornInThe90s.show()
+		println(bornInThe90s.toString())
+		
 		
 	}
 }
