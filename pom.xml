@@ -5,7 +5,7 @@
   <artifactId>my-app</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>SparkQueries.scala</name>
+  <name>HiveQueries.scala</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -18,6 +18,12 @@
     <artifactId>spark-sql_2.11</artifactId>
     <version>1.6.1</version>
 </dependency>
+    <dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-hive_2.11</artifactId>
+    <version>1.6.1</version>
+</dependency>
+
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-client</artifactId>
@@ -41,7 +47,7 @@
                             <goal>compile</goal>
                         </goals>
                         <configuration>  
-      <mainClass>com.mycompany.app.SparkQueries</mainClass>
+      <mainClass>com.mycompany.app.HiveQueries</mainClass>
     </configuration>
                     </execution>
                 </executions>
@@ -58,7 +64,7 @@
               <artifactId>exec-maven-plugin</artifactId>
               <version>1.2</version>
               <configuration>
-                <mainClass>com.mycompany.app.SparkQueries</mainClass>
+                <mainClass>com.mycompany.app.HiveQueries</mainClass>
               </configuration>
             </plugin>
             <plugin>
@@ -67,7 +73,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.mycompany.app.SparkQueries</mainClass>
+                            <mainClass>com.mycompany.app.HiveQueries</mainClass>
                             <addClasspath>true</addClasspath>
                             <classpathLayoutType>custom</classpathLayoutType>
                             <customClasspathLayout>lib/$${artifact.artifactId}-$${artifact.version}$${dashClassifier?}.$${artifact.extension}
