@@ -12,7 +12,7 @@ object HiveQueries{
 		import context.sql
 		//context.setConf("hive.metastore.warehouse.dir", "hdfs://http://localhost:50070/user/hive/warehouse")
 		//context.sql("SET hive.metastore.warehouse.dir=hdfs://localhost:50070/user/hive/warehouse");
-		val res = time{context.sql("SELECT name, SUM(CAST(length AS INT)) FROM track GROUP BY name HAVING COUNT(name)>1").count()}
+		val res = time{context.sql("SELECT name, SUM((length AS INT)) FROM track GROUP BY name HAVING COUNT(name)>1").count()}
 		
 		//res.show()
 		println("Number of results: " + res)
