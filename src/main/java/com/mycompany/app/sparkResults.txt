@@ -1,0 +1,19 @@
+// CREATE TABLE (not materialized)
+time{ sqlContext.sql("SELECT * FROM trackk").registerTempTable("track_test_table") }
+TIME: Elapsed time: 491.249476ms
+
+// CREATE TABLE GROUPED (not materialized)
+time{ sqlContext.sql("SELECT * FROM trackk GROUP BY id, artist, name, gid, length, year, modpending").registerTempTable("track_test_table_grouped") }
+TIME: Elapsed time: 685.583085ms
+
+// GROUPED COUNT
+time{ sqlContext.sql("SELECT trackk.name, COUNT(*) FROM trackk GROUP BY trackk.name HAVING COUNT (trackk.name) > 1").count() } 
+TIME: Elapsed time: 44254.009876ms
+
+// GROUPED SUM
+time{sqlContext.sql("SELECT trackk.name, SUM(cast(length AS INT)) FROM trackk GROUP BY trackk.name HAVING COUNT (trackk.name) > 1").count()}
+TIME: Elapsed time: 49626.872247ms
+
+// JOINS
+time { sqlContext.sql("SELECT artistt.name, trackk.name, track_tagg.tag FROM trackk,artistt,track_tagg WHERE artistt.id = trackk.artist AND trackk.id = track_tagg.track").count() }
+TIME: Elapsed time: 66588.556593ms
